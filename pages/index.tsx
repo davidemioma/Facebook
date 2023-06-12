@@ -1,5 +1,7 @@
 import Head from "next/head";
 import { Figtree } from "next/font/google";
+import Feed from "@/components/Feed";
+import Widgets from "@/components/Widgets";
 
 const font = Figtree({ subsets: ["latin"] });
 
@@ -11,7 +13,12 @@ export default function Home() {
 
         <link rel="icon" href="/assets/facebook-icon.webp" />
       </Head>
-      Home
+
+      <div className="flex p-5">
+        <Feed />
+
+        <Widgets />
+      </div>
     </div>
   );
 }

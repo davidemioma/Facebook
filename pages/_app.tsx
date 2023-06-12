@@ -4,6 +4,7 @@ import { Toaster } from "react-hot-toast";
 import { auth } from "@/libs/firebase";
 import Login from "@/components/Login";
 import Loading from "@/components/Loading";
+import Layout from "@/components/Layout";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -24,7 +25,9 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <Toaster />
 
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </>
   );
 }

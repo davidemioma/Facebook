@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const Loading = () => {
   return (
-    <div className="relative h-screen w-screen animate-pulse overflow-hidden">
+    <div className="relative h-screen w-screen animate-pulse overflow-hidden bg-gray-200">
       <Head>
         <title>Facebook</title>
 

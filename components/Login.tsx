@@ -197,7 +197,7 @@ const Login = () => {
   }
 
   return (
-    <div className="flex h-screen w-screen items-center justify-center overflow-hidden bg-gray-100">
+    <div className="flex h-screen w-screen items-center justify-center overflow-hidden bg-gray-200">
       <Head>
         <title>Facebook - log in or sign up</title>
 
