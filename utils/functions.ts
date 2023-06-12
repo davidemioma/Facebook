@@ -1,6 +1,12 @@
 import { db, storage } from "@/libs/firebase";
 import { DummyPost, Fileprops } from "@/types";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  serverTimestamp,
+  updateDoc,
+} from "firebase/firestore";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 
 export const numberFormatter = (num: number) => {
@@ -75,4 +81,44 @@ export const uploadPost = async (
       });
     }
   });
+};
+
+export const uploadImage = (e: React.FormEvent, setSelectedFile: any) => {
+  const reader = new FileReader();
+
+  const file = (e.target as HTMLFormElement).files?.[0];
+
+  reader.readAsDataURL(file);
+
+  reader.onload = (readerEvent) => {
+    setSelectedFile(readerEvent.target?.result);
+  };
+};
+
+export const updateCoverUrl = async (userId: string, selectedFile: string) => {
+  const imageRef = ref(storage, `posts/${userId}/cover`);
+
+  await uploadString(imageRef, selectedFile, "data_url").then(
+    async (snapshot) => {
+      const downloadUrl = await getDownloadURL(imageRef);
+
+      await updateDoc(doc(db, "users", userId), {
+        coverUrl: downloadUrl,
+      });
+    }
+  );
+};
+
+export const updatePhotoUrl = async (userId: string, selectedFile: string) => {
+  const imageRef = ref(storage, `posts/${userId}/profile`);
+
+  await uploadString(imageRef, selectedFile, "data_url").then(
+    async (snapshot) => {
+      const downloadUrl = await getDownloadURL(imageRef);
+
+      await updateDoc(doc(db, "users", userId), {
+        photoUrl: downloadUrl,
+      });
+    }
+  );
 };

@@ -31,7 +31,10 @@ const ProfileModal = () => {
 
           <hr />
 
-          <Link href={`/profile/${currentUser?.id}`}>
+          <Link
+            onClick={() => profileModal.onClose()}
+            href={`/profile/${currentUser?.id}`}
+          >
             <p className="mt-2 cursor-pointer text-sm font-semibold text-blue-500">
               View Profile
             </p>

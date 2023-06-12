@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
-import Input from "./Input";
+import Input from "./Input/Input";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
