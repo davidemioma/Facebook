@@ -3,6 +3,22 @@ import { DummyPost, Fileprops } from "@/types";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 
+export const numberFormatter = (num: number) => {
+  let newNumber = "";
+
+  if (num >= 1000000000) {
+    newNumber = (num / 1000000000).toFixed(1) + "B";
+  } else if (num >= 1000000) {
+    newNumber = (num / 1000000).toFixed(1) + "M";
+  } else if (num >= 1000) {
+    newNumber = (num / 1000).toFixed(1) + "K";
+  } else {
+    newNumber = `${num}`;
+  }
+
+  return newNumber;
+};
+
 const readFileContents = async (file: any) => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();

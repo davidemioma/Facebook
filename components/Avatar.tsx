@@ -5,12 +5,17 @@ import { User } from "@/types";
 
 interface Props {
   user: User;
+  small?: boolean;
 }
 
-const Avatar = ({ user }: Props) => {
+const Avatar = ({ user, small }: Props) => {
   return (
     <Link href={`/profile/${user?.id}`}>
-      <div className="relative h-10 w-10 cursor-pointer overflow-hidden rounded-full">
+      <div
+        className={`relative ${
+          small ? "h-8 w-8" : "h-10 w-10"
+        } cursor-pointer overflow-hidden rounded-full`}
+      >
         <Image
           className="object-cover"
           src={user?.photoUrl || "/assets/no-profile.jpeg"}
