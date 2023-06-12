@@ -31,11 +31,7 @@ const Sidebar = () => {
         />
 
         <SidebarBtn
-          imgSrc={
-            currentUser?.photoUrl
-              ? currentUser.photoUrl
-              : "/assets/no-profile.jpeg"
-          }
+          imgSrc={currentUser?.photoUrl || "/assets/no-profile.jpeg"}
           href={`/profile/${currentUser?.id}`}
           text="profile"
           active={router.asPath === `/profile/${currentUser?.id}`}

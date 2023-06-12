@@ -14,7 +14,7 @@ export default function Home() {
         <link rel="icon" href="/assets/facebook-icon.webp" />
       </Head>
 
-      <div className="flex p-5">
+      <div className="flex gap-5 p-5">
         <Feed />
 
         <Widgets />

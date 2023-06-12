@@ -6,11 +6,14 @@ import { RiNotification2Fill } from "react-icons/ri";
 import { FaFacebookMessenger } from "react-icons/fa";
 import { SearchIcon } from "@heroicons/react/outline";
 import useCurrentUser from "@/hooks/useCurrentUser";
+import useProfileModal from "@/hooks/useProfileModal";
 
 const Header = () => {
   const router = useRouter();
 
   const currentUser = useCurrentUser();
+
+  const profileModal = useProfileModal();
 
   return (
     <header className="fixed top-0 z-30 flex h-12 w-screen items-center gap-2 border-b border-gray-300 bg-white px-6">
@@ -46,19 +49,15 @@ const Header = () => {
         <IconBtn
           Icon={RiNotification2Fill}
           text="Notification"
-          active={false}
-          onClick={() => {}}
+          active={router.asPath === "/notifications"}
+          onClick={() => router.push("/notifications")}
         />
 
         <IconBtn
-          imgSrc={
-            currentUser?.photoUrl
-              ? currentUser?.photoUrl
-              : "/assets/no-profile.jpeg"
-          }
+          imgSrc={currentUser?.photoUrl || "/assets/no-profile.jpeg"}
           text="Account"
-          active={false}
-          onClick={() => {}}
+          active={profileModal.isOpen}
+          onClick={() => profileModal.toggle()}
         />
       </div>
     </header>
