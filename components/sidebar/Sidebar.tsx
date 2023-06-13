@@ -18,7 +18,7 @@ const Sidebar = () => {
     <div
       className={`fixed top-12 z-20 h-full bg-white ${
         router.asPath === "/"
-          ? "w-14 lg:w-64 lg:border-none lg:bg-transparent"
+          ? "w-14 lg:w-64 lg:bg-transparent lg:pr-3"
           : "w-14"
       } border-r border-gray-300`}
     >
