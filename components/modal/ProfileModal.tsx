@@ -41,7 +41,11 @@ const ProfileModal = () => {
         <div className="mx-1 my-5">
           <button
             className="flex w-full items-center gap-3 rounded-lg p-2 hover:bg-gray-100"
-            onClick={() => signOut(auth)}
+            onClick={() => {
+              signOut(auth);
+
+              profileModal.onClose();
+            }}
           >
             <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-200">
               <IoMdLogOut className="h-6" />

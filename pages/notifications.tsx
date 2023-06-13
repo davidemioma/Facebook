@@ -1,13 +1,18 @@
+import { useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import { Figtree } from "next/font/google";
-import useNotifications from "@/hooks/useNotifications";
 import Notification from "@/components/Notification";
+import useNotifications from "@/hooks/useNotifications";
 
 const font = Figtree({ subsets: ["latin"] });
 
 export default function Notifications() {
-  const { notifications } = useNotifications();
+  const { notifications, changeHasNotification } = useNotifications();
+
+  useEffect(() => {
+    changeHasNotification();
+  }, [changeHasNotification]);
 
   return (
     <div className={`${font.className}`}>

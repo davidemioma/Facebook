@@ -39,7 +39,15 @@ const useNotifications = () => {
     [currentUser?.id]
   );
 
-  return { notifications, viewNotification };
+  const changeHasNotification = useCallback(async () => {
+    if (!currentUser?.id) return;
+
+    await updateDoc(doc(db, "users", `${currentUser?.id}`), {
+      hasNotification: false,
+    });
+  }, [currentUser?.id]);
+
+  return { notifications, viewNotification, changeHasNotification };
 };
 
 export default useNotifications;

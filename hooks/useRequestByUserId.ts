@@ -5,6 +5,7 @@ import {
   onSnapshot,
   serverTimestamp,
   setDoc,
+  updateDoc,
 } from "firebase/firestore";
 import useCurrentUser from "./useCurrentUser";
 import { db } from "@/libs/firebase";
@@ -59,6 +60,10 @@ const useRequestByUserId = (userId: string) => {
 
     await addDoc(collection(db, "users", currentUser?.id!, "sent"), {
       mail: account?.mail,
+    });
+
+    await updateDoc(doc(db, "users", userId), {
+      hasNotification: true,
     });
   };
 

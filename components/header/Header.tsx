@@ -53,12 +53,18 @@ const Header = () => {
           onClick={() => router.push("/chats")}
         />
 
-        <IconBtn
-          Icon={RiNotification2Fill}
-          text="Notification"
-          active={router.asPath === "/notifications"}
-          onClick={() => router.push("/notifications")}
-        />
+        <div className="relative">
+          <IconBtn
+            Icon={RiNotification2Fill}
+            text="Notification"
+            active={router.asPath === "/notifications"}
+            onClick={() => router.push("/notifications")}
+          />
+
+          {currentUser?.hasNotification && (
+            <span className="absolute right-0 top-0 h-3 w-3 animate-pulse rounded-full bg-blue-500" />
+          )}
+        </div>
 
         <IconBtn
           imgSrc={currentUser?.photoUrl || "/assets/no-profile.jpeg"}
