@@ -6,6 +6,7 @@ import Login from "@/components/Login";
 import Loading from "@/components/Loading";
 import Layout from "@/components/Layout";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { SearchProvider } from "@/context/SearchProvider";
 
 export default function App({ Component, pageProps }: AppProps) {
   const [user, loading] = useAuthState(auth);
@@ -25,9 +26,11 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <Toaster />
 
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <SearchProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </SearchProvider>
     </>
   );
 }

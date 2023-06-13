@@ -2,15 +2,12 @@ import React from "react";
 import Link from "next/link";
 import Avatar from "../Avatar";
 import { auth } from "@/libs/firebase";
-import { useRouter } from "next/router";
 import { signOut } from "@firebase/auth";
 import { IoMdLogOut } from "react-icons/io";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import useProfileModal from "@/hooks/useProfileModal";
 
 const ProfileModal = () => {
-  const router = useRouter();
-
   const currentUser = useCurrentUser();
 
   const profileModal = useProfileModal();

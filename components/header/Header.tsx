@@ -7,6 +7,7 @@ import { FaFacebookMessenger } from "react-icons/fa";
 import { SearchIcon } from "@heroicons/react/outline";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import useProfileModal from "@/hooks/useProfileModal";
+import { useSearchModal } from "@/context/SearchProvider";
 
 const Header = () => {
   const router = useRouter();
@@ -15,8 +16,10 @@ const Header = () => {
 
   const profileModal = useProfileModal();
 
+  const searchModal = useSearchModal();
+
   return (
-    <header className="fixed top-0 z-30 flex h-12 w-screen items-center gap-2 border-b border-gray-300 bg-white px-6">
+    <header className="fixed top-0 z-30 flex h-12 w-screen items-center justify-between gap-2 border-b border-gray-300 bg-white px-6">
       <Image
         className="cursor-pointer object-contain"
         onClick={() => router.push("/")}
@@ -26,17 +29,21 @@ const Header = () => {
         alt="Logo"
       />
 
-      <div className="flex-1">
-        <div className="mx-auto flex max-w-lg items-center space-x-2 rounded-full bg-gray-100 px-3 py-1.5">
-          <SearchIcon className="h-4 text-gray-500" />
+      {!router.asPath.includes("/profile") && (
+        <div className="flex-1">
+          <div className="mx-auto flex max-w-lg items-center space-x-2 rounded-full bg-gray-100 px-3 py-1.5">
+            <SearchIcon className="h-4 text-gray-500" />
 
-          <input
-            className="flex-1 bg-transparent text-sm outline-none md:text-base"
-            type="text"
-            placeholder="Search Facebook"
-          />
+            <input
+              className="flex-1 bg-transparent text-sm outline-none md:text-base"
+              value={searchModal?.text}
+              type="text"
+              placeholder="Search Facebook"
+              onChange={(e) => searchModal?.setText(e.target.value)}
+            />
+          </div>
         </div>
-      </div>
+      )}
 
       <div className="hidden items-center gap-3 md:flex">
         <IconBtn
