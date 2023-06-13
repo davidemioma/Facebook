@@ -52,3 +52,19 @@ export interface CommentProps {
     nanoseconds: number;
   };
 }
+
+export interface RequestProps {
+  id: string;
+  requestId: string;
+  mail: string;
+  timstamp: {
+    seconds: number;
+    nanoseconds: number;
+  };
+}
+
+export interface FriendProps {
+  id: string;
+  userId: string;
+  mail: string;
+}

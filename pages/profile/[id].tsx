@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Head from "next/head";
+import Image from "next/image";
 import Box from "@/components/Box";
 import { useRouter } from "next/router";
 import { Figtree } from "next/font/google";
@@ -11,6 +12,8 @@ import SelectBtn from "@/components/Input/SelectBtn";
 import CoverImage from "@/components/images/CoverImage";
 import ProfileImages from "@/components/images/ProfileImages";
 import usePostsByUserId from "@/hooks/usePostsByUserId";
+import useFriends from "@/hooks/useFriends";
+import Friend from "@/components/Friend";
 
 const font = Figtree({ subsets: ["latin"] });
 
@@ -29,6 +32,8 @@ export default function Profile() {
   const account = useAccountById(id as string);
 
   const posts = usePostsByUserId(id as string);
+
+  const { friends } = useFriends(id as string);
 
   const [action, setAction] = useState(ACTIONS.POSTS);
 
@@ -60,7 +65,29 @@ export default function Profile() {
             )}
           </div>
 
-          <div className="scrollbar-hide h-60 overflow-x-hidden overflow-y-scroll"></div>
+          <div className="scrollbar-hide h-60 overflow-x-hidden overflow-y-scroll">
+            {friends.length > 0 ? (
+              <div className="mt-3 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                {friends.map((friend) => (
+                  <Friend key={friend.id} friend={friend} />
+                ))}
+              </div>
+            ) : (
+              <div className="flex h-full items-center justify-center">
+                <div className="flex flex-col items-center">
+                  <Image
+                    className="object-contain"
+                    src="/assets/empty.svg"
+                    width={150}
+                    height={150}
+                    alt=""
+                  />
+
+                  <p className="text-lg font-bold">No new friends</p>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     );

@@ -9,6 +9,10 @@ import {
 } from "firebase/firestore";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 
+export const generateId = (id1: any, id2: any) => {
+  return id1 > id2 ? id1 + id2 : id2 + id1;
+};
+
 export const numberFormatter = (num: number) => {
   let newNumber = "";
 

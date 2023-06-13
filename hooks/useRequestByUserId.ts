@@ -47,6 +47,7 @@ const useRequestByUserId = (userId: string) => {
     await addDoc(collection(db, "users", userId, "notifications"), {
       requestId: currentUser?.id,
       task: "friend request",
+      seen: false,
       timstamp: serverTimestamp(),
     });
 
