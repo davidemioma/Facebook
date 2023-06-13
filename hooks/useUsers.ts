@@ -66,8 +66,8 @@ const useUsers = () => {
       (snapshot) =>
         setUsers(
           snapshot?.docs
-            ?.filter((doc) => doc.id !== currentUser?.id!)
             ?.map((doc: any) => ({ id: doc.id, ...doc.data() }))
+            ?.filter((doc) => doc.id !== currentUser?.id!)
         )
     );
 

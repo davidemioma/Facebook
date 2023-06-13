@@ -80,3 +80,12 @@ export interface NotificationProps {
     nanoseconds: number;
   };
 }
+
+export interface ConversationProps {
+  id: string;
+  usersMatched: string[];
+  timstamp: {
+    seconds: number;
+    nanoseconds: number;
+  };
+}

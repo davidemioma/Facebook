@@ -7,6 +7,8 @@ import { useRouter } from "next/router";
 import SearchModal from "./modal/SearchModal";
 import useProfileModal from "@/hooks/useProfileModal";
 import { useSearchModal } from "@/context/SearchProvider";
+import Desktop from "./messenger/sidebar/Desktop";
+import Mobile from "./messenger/sidebar/Mobile";
 
 interface Props {
   children: React.ReactNode;
@@ -26,23 +28,35 @@ const Layout = ({ children }: Props) => {
   };
 
   return (
-    <div className="h-screen w-screen overflow-y-auto bg-gray-200">
-      <Header />
+    <>
+      {router.asPath.includes("/chats") ? (
+        <div className="h-screen w-screen bg-gray-100">
+          <Desktop />
 
-      <PostModal />
+          <Mobile />
 
-      <ProfileModal />
+          <main className="lg:ml-24">{children}</main>
+        </div>
+      ) : (
+        <div className="h-screen w-screen overflow-y-auto bg-gray-200">
+          <Header />
 
-      <SearchModal />
+          <PostModal />
 
-      <div className="mt-12" onClick={closeAllModals}>
-        <Sidebar />
+          <ProfileModal />
 
-        <main className={`ml-14 ${router.asPath === "/" && "lg:ml-64"}`}>
-          {children}
-        </main>
-      </div>
-    </div>
+          <SearchModal />
+
+          <div className="mt-12" onClick={closeAllModals}>
+            <Sidebar />
+
+            <main className={`ml-14 ${router.asPath === "/" && "lg:ml-64"}`}>
+              {children}
+            </main>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

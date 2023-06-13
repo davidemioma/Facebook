@@ -12,6 +12,7 @@ import useCurrentUser from "@/hooks/useCurrentUser";
 import useFriends from "../../hooks/useFriends";
 import useMyFriend from "@/hooks/useMyFriend";
 import {
+  generateId,
   numberFormatter,
   updatePhotoUrl,
   uploadImage,
@@ -91,11 +92,13 @@ const ProfileImages = ({ accountId }: Props) => {
     setLoading(true);
 
     try {
-      const id = createChat();
+      const id = generateId(currentUser?.id, account?.id);
+
+      createChat(id);
 
       toast.success("Chat created");
 
-      router.push(`/chats/${id}`);
+      router.push(`/chats/conversations/${id}`);
     } catch (err) {
       toast.error("Something went wrong");
     } finally {
