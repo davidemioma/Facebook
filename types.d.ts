@@ -68,3 +68,14 @@ export interface FriendProps {
   userId: string;
   mail: string;
 }
+
+export interface NotificationProps {
+  id: string;
+  requestId: string;
+  task: string;
+  seen: boolean;
+  timstamp: {
+    seconds: number;
+    nanoseconds: number;
+  };
+}

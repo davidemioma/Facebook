@@ -20,11 +20,13 @@ const Friend = ({ friend }: Props) => {
 
   const { hasAdded } = useMyFriend(friend.userId);
 
-  const { sendRequest } = useRequestByUserId(friend.userId);
+  const { sendRequest, hasSent } = useRequestByUserId(friend.userId);
 
   const [loading, setIsLoading] = useState(false);
 
   const sendFriendRequest = () => {
+    if (hasSent) return;
+
     setIsLoading(true);
 
     sendRequest(uuidv4())
@@ -57,7 +59,9 @@ const Friend = ({ friend }: Props) => {
             >
               <HiUserAdd size={20} />
 
-              <p className="hidden sm:inline">Add Friend</p>
+              <p className="hidden sm:inline">
+                {hasSent ? "Sent" : "Add Friend"}
+              </p>
             </button>
           )}
         </>

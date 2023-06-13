@@ -73,18 +73,16 @@ const ProfileImages = ({ accountId }: Props) => {
 
     setLoading(true);
 
-    const sendFriendRequest = () => {
-      sendRequest(uuidv4())
-        .then(() => {
-          toast.success("Request sent");
-        })
-        .catch((err) => {
-          toast.error("Something went wrong");
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    };
+    sendRequest(uuidv4())
+      .then(() => {
+        toast.success("Request sent");
+      })
+      .catch((err) => {
+        toast.error("Something went wrong");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const createChatHandler = async () => {
@@ -195,7 +193,7 @@ const ProfileImages = ({ accountId }: Props) => {
               >
                 {hasAdded ? <FaUserCheck size={20} /> : <HiUserAdd size={20} />}
 
-                <p>{hasAdded ? "Friend" : "Add Friend"}</p>
+                <p>{hasAdded ? "Friend" : hasSent ? "sent" : "Add Friend"}</p>
               </button>
 
               {hasAdded && (
