@@ -1,8 +1,13 @@
 import React from "react";
 import useConversations from "@/hooks/useConversations";
 import ConvoBox from "./ConvoBox";
+import { useRouter } from "next/router";
 
 const ConvoList = () => {
+  const router = useRouter();
+
+  const { conversationId } = router.query;
+
   const conversations = useConversations();
 
   return (
@@ -11,7 +16,11 @@ const ConvoList = () => {
 
       <div className="flex flex-col">
         {conversations.map((conversation) => (
-          <ConvoBox key={conversation.id} conversation={conversation} />
+          <ConvoBox
+            key={conversation.id}
+            conversation={conversation}
+            selected={conversationId === conversation.id}
+          />
         ))}
       </div>
     </div>

@@ -89,3 +89,13 @@ export interface ConversationProps {
     nanoseconds: number;
   };
 }
+
+export interface MessageProps {
+  id: string;
+  senderId: string;
+  message: string;
+  timestamp: {
+    seconds: number;
+    nanoseconds: number;
+  };
+}

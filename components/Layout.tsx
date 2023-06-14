@@ -17,6 +17,8 @@ interface Props {
 const Layout = ({ children }: Props) => {
   const router = useRouter();
 
+  const { conversationId } = router.query;
+
   const profileModal = useProfileModal();
 
   const searchModal = useSearchModal();
@@ -33,7 +35,7 @@ const Layout = ({ children }: Props) => {
         <div className="h-screen w-screen bg-gray-100">
           <Desktop />
 
-          <Mobile />
+          {!conversationId && <Mobile />}
 
           <main className="lg:ml-24">{children}</main>
         </div>
