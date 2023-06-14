@@ -22,6 +22,10 @@ const ProfileDrawer = ({ conversation }: Props) => {
 
   const account = useAccountById(`${otherUserId}`);
 
+  const status = useMemo(() => {
+    return account?.isActive ? "Active" : "Offline";
+  }, [account?.isActive]);
+
   const joinedDate = useMemo(() => {
     if (!conversation?.timestamp?.seconds) return "";
 
@@ -40,6 +44,8 @@ const ProfileDrawer = ({ conversation }: Props) => {
           </div>
 
           <p>{account?.displayName}</p>
+
+          <p className="text-sm text-gray-500">{status}</p>
 
           <button
             onClick={() => {

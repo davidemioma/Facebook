@@ -6,6 +6,7 @@ export interface User {
   photoUrl: string | null;
   coverUrl: string;
   surname: string;
+  isActive: boolean;
   hasNotification: boolean;
 }
 

@@ -9,7 +9,7 @@ import {
 import { useRouter } from "next/router";
 import { toast } from "react-hot-toast";
 import { auth, db } from "@/libs/firebase";
-import { doc, setDoc } from "@firebase/firestore";
+import { doc, setDoc, updateDoc } from "@firebase/firestore";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
 enum ACTIONS {
@@ -43,6 +43,10 @@ const Login = () => {
     if (action === ACTIONS.LOGIN) {
       signInWithEmailAndPassword(auth, data.email, data.password)
         .then((res) => {
+          updateDoc(doc(db, "users", res?.user?.uid), {
+            isActive: true,
+          });
+
           toast.success("Login successful");
 
           router.push("/");
@@ -57,6 +61,7 @@ const Login = () => {
           setDoc(
             doc(db, "users", res?.user?.uid),
             {
+              isActive: true,
               firstname: data.firstname,
               surname: data.surname,
               mail: res?.user?.email,

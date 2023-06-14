@@ -1,7 +1,6 @@
 import React from "react";
 import SidebarBtn from "./SidebarBtn";
-import { signOut } from "@firebase/auth";
-import { auth } from "@/libs/firebase";
+import { signout } from "@/utils/functions";
 import { useRouter } from "next/router";
 import { HomeIcon } from "@heroicons/react/solid";
 import { LogoutIcon } from "@heroicons/react/outline";
@@ -64,7 +63,7 @@ const Sidebar = () => {
             href=""
             text="Logout"
             active={false}
-            onClick={() => signOut(auth)}
+            onClick={() => signout(`${currentUser?.id}`)}
           />
         </div>
       </div>

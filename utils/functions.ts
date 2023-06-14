@@ -1,5 +1,7 @@
 import { db, storage } from "@/libs/firebase";
 import { DummyPost, Fileprops } from "@/types";
+import { auth } from "@/libs/firebase";
+import { signOut } from "@firebase/auth";
 import {
   addDoc,
   collection,
@@ -125,4 +127,12 @@ export const updatePhotoUrl = async (userId: string, selectedFile: string) => {
       });
     }
   );
+};
+
+export const signout = async (userId: string) => {
+  await updateDoc(doc(db, "users", userId), {
+    isActive: false,
+  });
+
+  signOut(auth);
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import Link from "next/link";
 import { ConversationProps } from "@/types";
 import useOtherUser from "@/hooks/useOtherUser";
@@ -18,6 +18,10 @@ const Header = ({ conversation }: Props) => {
 
   const profileDrawer = useProfileDrawer();
 
+  const statusText = useMemo(() => {
+    return account?.isActive ? "Active" : "Offline";
+  }, [account?.isActive]);
+
   return (
     <div className="flex w-full items-center justify-between border-b bg-white px-4 py-3 shadow-sm lg:px-6">
       <div className="flex items-center gap-3">
@@ -30,7 +34,11 @@ const Header = ({ conversation }: Props) => {
 
         <Avatar user={account!} />
 
-        <p>{account?.displayName}</p>
+        <div className="flex flex-col">
+          <p>{account?.displayName}</p>
+
+          <p className="text-sm font-light text-neutral-500">{statusText}</p>
+        </div>
       </div>
 
       <HiEllipsisHorizontal

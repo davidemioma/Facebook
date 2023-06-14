@@ -1,12 +1,14 @@
 import { useMemo } from "react";
-import { auth } from "@/libs/firebase";
 import { useRouter } from "next/router";
-import { signOut } from "firebase/auth";
+import { signout } from "@/utils/functions";
 import { HiChat } from "react-icons/hi";
 import { HiArrowLeftOnRectangle, HiUsers } from "react-icons/hi2";
+import useCurrentUser from "./useCurrentUser";
 
 const useRoutes = () => {
   const router = useRouter();
+
+  const currentUser = useCurrentUser();
 
   const routes = useMemo(
     () => [
@@ -25,7 +27,7 @@ const useRoutes = () => {
       {
         label: "Logout",
         href: "#",
-        onClick: () => signOut(auth),
+        onClick: () => signout(`${currentUser?.id}`),
         icon: HiArrowLeftOnRectangle,
       },
     ],

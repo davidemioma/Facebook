@@ -1,16 +1,23 @@
 import React from "react";
 import Link from "next/link";
 import Avatar from "../Avatar";
-import { auth } from "@/libs/firebase";
-import { signOut } from "@firebase/auth";
+import { auth, db } from "@/libs/firebase";
+import { signout } from "@/utils/functions";
 import { IoMdLogOut } from "react-icons/io";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import useProfileModal from "@/hooks/useProfileModal";
+import { doc, updateDoc } from "firebase/firestore";
 
 const ProfileModal = () => {
   const currentUser = useCurrentUser();
 
   const profileModal = useProfileModal();
+
+  const signoutHandler = async () => {
+    signout(`${currentUser?.id}`);
+
+    profileModal.onClose();
+  };
 
   if (!profileModal.isOpen) return null;
 
@@ -41,11 +48,7 @@ const ProfileModal = () => {
         <div className="mx-1 my-5">
           <button
             className="flex w-full items-center gap-3 rounded-lg p-2 hover:bg-gray-100"
-            onClick={() => {
-              signOut(auth);
-
-              profileModal.onClose();
-            }}
+            onClick={signoutHandler}
           >
             <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-200">
               <IoMdLogOut className="h-6" />
