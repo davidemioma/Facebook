@@ -94,6 +94,7 @@ export interface MessageProps {
   id: string;
   senderId: string;
   message: string;
+  hasSeen: string[];
   timestamp: {
     seconds: number;
     nanoseconds: number;

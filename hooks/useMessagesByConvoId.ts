@@ -4,8 +4,12 @@ import { db } from "@/libs/firebase";
 import {
   addDoc,
   collection,
+  doc,
   onSnapshot,
+  orderBy,
+  query,
   serverTimestamp,
+  updateDoc,
 } from "firebase/firestore";
 import useCurrentUser from "./useCurrentUser";
 
@@ -16,13 +20,18 @@ const useMessagesByConvoId = (id: string) => {
 
   useEffect(
     () =>
-      onSnapshot(collection(db, "chats", id, "messages"), (snapshot) =>
-        setMessages(
-          snapshot.docs.map((doc: any) => ({
-            id: doc.id,
-            ...doc.data(),
-          }))
-        )
+      onSnapshot(
+        query(
+          collection(db, "chats", id, "messages"),
+          orderBy("timestamp", "asc")
+        ),
+        (snapshot) =>
+          setMessages(
+            snapshot.docs.map((doc: any) => ({
+              id: doc.id,
+              ...doc.data(),
+            }))
+          )
       ),
     [id]
   );
@@ -31,11 +40,20 @@ const useMessagesByConvoId = (id: string) => {
     await addDoc(collection(db, "chats", id, "messages"), {
       senderId: currentUser?.id,
       message,
+      hasSeen: [currentUser?.id],
       timestamp: serverTimestamp(),
     });
   };
 
-  return { messages, sendMessage };
+  const updateMessage = async (message: MessageProps, userId: string) => {
+    if (!message) return;
+
+    await updateDoc(doc(db, "chats", id, "messages", message?.id), {
+      hasSeen: [message?.senderId, userId],
+    });
+  };
+
+  return { messages, sendMessage, updateMessage };
 };
 
 export default useMessagesByConvoId;

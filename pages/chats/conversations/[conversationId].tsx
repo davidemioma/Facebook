@@ -36,7 +36,10 @@ export default function Conversation() {
           <div className="flex h-full flex-col">
             <Header conversation={conversation} />
 
-            <Body messages={messages} />
+            <Body
+              conversationId={conversationId as string}
+              messages={messages}
+            />
 
             <Form conversationId={conversationId as string} />
           </div>

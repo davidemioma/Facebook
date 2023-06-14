@@ -7,14 +7,21 @@ import useAccountById from "@/hooks/useAccountById";
 
 interface Props {
   message: MessageProps;
+  isLast?: boolean;
 }
 
-const MessageBox = ({ message }: Props) => {
+const MessageBox = ({ message, isLast }: Props) => {
   const currentUser = useCurrentUser();
 
   const currentUserMsg = message.senderId === currentUser?.id;
 
   const account = useAccountById(message.senderId);
+
+  const seenId = (message.hasSeen || []).filter(
+    (id) => id !== message.senderId
+  )?.[0];
+
+  const seenAccount = useAccountById(`${seenId}`);
 
   return (
     <div className={`flex gap-3 p-4 ${currentUserMsg && "justify-end"}`}>
@@ -25,9 +32,11 @@ const MessageBox = ({ message }: Props) => {
       <div className={`flex flex-col gap-2 ${currentUserMsg && "items-end"}`}>
         <p className="text-sm text-gray-500">{account?.displayName}</p>
 
-        <p className="text-sm text-gray-400">
-          {format(new Date(message?.timestamp?.seconds * 1000), "p")}
-        </p>
+        {message?.timestamp?.seconds && (
+          <p className="text-sm text-gray-400">
+            {format(new Date(message?.timestamp?.seconds * 1000), "p")}
+          </p>
+        )}
 
         <p
           className={`${
@@ -36,6 +45,10 @@ const MessageBox = ({ message }: Props) => {
         >
           {message.message}
         </p>
+
+        {isLast && currentUserMsg && seenId && (
+          <p className="text-sm font-light text-gray-500">{`Seen by ${seenAccount?.displayName}`}</p>
+        )}
       </div>
     </div>
   );

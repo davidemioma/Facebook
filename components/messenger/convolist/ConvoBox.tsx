@@ -1,10 +1,11 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import { ConversationProps } from "@/types";
 import { useRouter } from "next/router";
 import useOtherUser from "@/hooks/useOtherUser";
 import useAccountById from "@/hooks/useAccountById";
 import Avatar from "@/components/Avatar";
 import useMessagesByConvoId from "@/hooks/useMessagesByConvoId";
+import useCurrentUser from "@/hooks/useCurrentUser";
 
 interface Props {
   conversation: ConversationProps;
@@ -14,6 +15,8 @@ interface Props {
 const ConvoBox = ({ conversation, selected }: Props) => {
   const router = useRouter();
 
+  const currentUser = useCurrentUser();
+
   const otherUserId = useOtherUser(conversation);
 
   const account = useAccountById(otherUserId);
@@ -21,6 +24,16 @@ const ConvoBox = ({ conversation, selected }: Props) => {
   const { messages } = useMessagesByConvoId(conversation.id);
 
   const lastMessage = messages[messages.length - 1];
+
+  const hasSeen = useMemo(() => {
+    if (!lastMessage) return false;
+
+    const seenArr = lastMessage?.hasSeen || [];
+
+    if (!currentUser?.id) return false;
+
+    return seenArr.findIndex((id) => id === `${currentUser.id}`) !== -1;
+  }, [currentUser?.id, lastMessage]);
 
   const onClick = useCallback(() => {
     router.push(`/chats/conversations/${conversation.id}`);
@@ -40,8 +53,12 @@ const ConvoBox = ({ conversation, selected }: Props) => {
           {account?.displayName}
         </p>
 
-        <p className="truncate text-sm font-medium">
-          {lastMessage.message || "Started a conversation"}
+        <p
+          className={`text-sm ${
+            hasSeen ? "text-gray-500" : "font-medium text-black"
+          } truncate`}
+        >
+          {lastMessage?.message || "Started a conversation"}
         </p>
       </div>
     </div>
