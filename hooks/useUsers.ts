@@ -63,12 +63,13 @@ const useUsers = () => {
           ...newSentEmails,
         ])
       ),
-      (snapshot) =>
-        setUsers(
-          snapshot?.docs
-            ?.map((doc: any) => ({ id: doc.id, ...doc.data() }))
-            ?.filter((doc) => doc.id !== currentUser?.id!)
-        )
+      (snapshot) => {
+        const users = snapshot?.docs
+          ?.map((doc: any) => ({ id: doc.id, ...doc.data() }))
+          ?.filter((doc) => doc.id !== `${currentUser?.id}`);
+
+        setUsers(users || []);
+      }
     );
 
     return unSub;

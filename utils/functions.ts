@@ -1,5 +1,5 @@
 import { db, storage } from "@/libs/firebase";
-import { DummyPost, Fileprops } from "@/types";
+import { DummyPost, Fileprops, User } from "@/types";
 import { auth } from "@/libs/firebase";
 import { signOut } from "@firebase/auth";
 import {
@@ -135,4 +135,24 @@ export const signout = async (userId: string) => {
   });
 
   signOut(auth);
+};
+
+export const getRandomUsers = (users: User[], numOfUsers: number) => {
+  if (numOfUsers > users.length) {
+    return users.slice(0, users.length);
+  }
+
+  const randomUsers = [];
+
+  const usersCopy = [...users];
+
+  while (randomUsers.length < numOfUsers) {
+    const randomIndex = Math.floor(Math.random() * usersCopy.length);
+
+    const randomUser = usersCopy.splice(randomIndex, 1)[0];
+
+    randomUsers.push(randomUser);
+  }
+
+  return randomUsers;
 };
