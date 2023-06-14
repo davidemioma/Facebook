@@ -34,13 +34,9 @@ const SidebarBtn = ({ Icon, imgSrc, text, href, active, onClick }: Props) => {
           {Icon && <Icon className={`h-6 ${active && "text-blue-500"}`} />}
 
           {imgSrc && (
-            <Image
-              className="rounded-full object-cover"
-              src={imgSrc}
-              width={24}
-              height={24}
-              alt=""
-            />
+            <div className="relative h-6 w-6 overflow-hidden rounded-full">
+              <Image className="object-cover" src={imgSrc} fill alt="" />
+            </div>
           )}
 
           <p className={`hidden ${router.asPath === "/" && "lg:inline"}`}>
