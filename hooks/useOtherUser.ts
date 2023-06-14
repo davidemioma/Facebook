@@ -7,7 +7,7 @@ const useOtherUser = (conversation: ConversationProps) => {
 
   const otherUser = useMemo(
     () =>
-      conversation?.usersMatched.filter((id) => id !== `${currentUser?.id}`),
+      conversation?.usersMatched?.filter((id) => id !== `${currentUser?.id}`),
     [currentUser?.id, conversation]
   );
 

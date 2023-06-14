@@ -7,6 +7,8 @@ import Body from "@/components/messenger/Body";
 import useMessagesByConvoId from "@/hooks/useMessagesByConvoId";
 import ConvoList from "@/components/messenger/convolist/ConvoList";
 import useConversationById from "@/hooks/useConversationById";
+import ProfileDrawer from "@/components/modal/profileDrawer/ProfileDrawer";
+import ConfirmBody from "@/components/modal/confirmModal/ConfirmBody";
 
 const font = Figtree({ subsets: ["latin"] });
 
@@ -28,6 +30,10 @@ export default function Conversation() {
       </Head>
 
       <div className="h-screen w-full overflow-hidden">
+        <ProfileDrawer conversation={conversation} />
+
+        <ConfirmBody />
+
         <div className="hidden lg:block">
           <ConvoList />
         </div>

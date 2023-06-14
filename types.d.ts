@@ -84,7 +84,7 @@ export interface NotificationProps {
 export interface ConversationProps {
   id: string;
   usersMatched: string[];
-  timstamp: {
+  timestamp: {
     seconds: number;
     nanoseconds: number;
   };

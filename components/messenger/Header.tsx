@@ -5,6 +5,7 @@ import useOtherUser from "@/hooks/useOtherUser";
 import useAccountById from "@/hooks/useAccountById";
 import { HiChevronLeft, HiEllipsisHorizontal } from "react-icons/hi2";
 import Avatar from "../Avatar";
+import useProfileDrawer from "@/hooks/useProfileDrawer";
 
 interface Props {
   conversation: ConversationProps | null;
@@ -14,6 +15,8 @@ const Header = ({ conversation }: Props) => {
   const otherUserId = useOtherUser(conversation!);
 
   const account = useAccountById(`${otherUserId}`);
+
+  const profileDrawer = useProfileDrawer();
 
   return (
     <div className="flex w-full items-center justify-between border-b bg-white px-4 py-3 shadow-sm lg:px-6">
@@ -33,6 +36,7 @@ const Header = ({ conversation }: Props) => {
       <HiEllipsisHorizontal
         className="cursor-pointer text-sky-500 transition hover:text-sky-600"
         size={32}
+        onClick={() => profileDrawer.onOpen()}
       />
     </div>
   );
