@@ -15,12 +15,12 @@ interface Props {
 const SidebarBtn = ({ Icon, imgSrc, text, href, active, onClick }: Props) => {
   const router = useRouter();
 
-  const [showText, setShowText] = useState(false);
-
   return (
     <Link href={href}>
       <div
-        className={`relative h-10 border-l-4 ${active && " border-blue-600"}`}
+        className={`group relative h-10 border-l-4 ${
+          active && " border-blue-600"
+        }`}
         onClick={onClick}
       >
         <div
@@ -28,10 +28,10 @@ const SidebarBtn = ({ Icon, imgSrc, text, href, active, onClick }: Props) => {
             router.asPath === "/" &&
             " lg:w-full lg:justify-start lg:space-x-3 lg:pl-2 lg:hover:bg-gray-300"
           }`}
-          onMouseEnter={() => setShowText(true)}
-          onMouseLeave={() => setShowText(false)}
         >
-          {Icon && <Icon className={`h-6 ${active && "text-blue-500"}`} />}
+          {Icon && (
+            <Icon size={20} className={`h-6 ${active && "text-blue-500"}`} />
+          )}
 
           {imgSrc && (
             <div className="relative h-6 w-6 overflow-hidden rounded-full">
@@ -43,12 +43,6 @@ const SidebarBtn = ({ Icon, imgSrc, text, href, active, onClick }: Props) => {
             {text}
           </p>
         </div>
-
-        {showText && (
-          <div className="absolute -right-20 top-1/2 z-20 -translate-y-1/2 rounded-lg bg-black/75 px-4 py-2 text-xs text-white lg:hidden">
-            {text}
-          </div>
-        )}
       </div>
     </Link>
   );

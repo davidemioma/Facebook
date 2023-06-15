@@ -37,7 +37,7 @@ const Box = () => {
           className="flex w-full items-center space-x-2 rounded-lg px-6 py-2 hover:bg-gray-100"
           onClick={openPostModal}
         >
-          <TiVideo size={20} className="text-red-500" />
+          <TiVideo size={20} className="flex-shrink-0 text-red-500" />
 
           <p className="whitespace-nowrap text-xs sm:text-sm">Live video</p>
         </button>
@@ -46,7 +46,7 @@ const Box = () => {
           className="flex w-full items-center space-x-2 rounded-lg px-6 py-2 hover:bg-gray-100"
           onClick={openPostModal}
         >
-          <IoMdPhotos size={20} className="text-green-500" />
+          <IoMdPhotos size={20} className="flex-shrink-0 text-green-500" />
 
           <p className="whitespace-nowrap text-xs sm:text-sm">Photo/video</p>
         </button>
@@ -55,7 +55,7 @@ const Box = () => {
           className="hidden w-full items-center space-x-2 rounded-lg px-6 py-2 hover:bg-gray-100 sm:inline-flex"
           onClick={openPostModal}
         >
-          <BiHappy size={20} className="text-yellow-500" />
+          <BiHappy size={20} className="flex-shrink-0 text-yellow-500" />
 
           <p className="whitespace-nowrap text-xs sm:text-sm">
             Feeling/activity

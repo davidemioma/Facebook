@@ -93,13 +93,14 @@ const PostModal = () => {
         </div>
 
         <div className="flex items-center space-x-2 px-4 py-2">
-          <Image
-            className="rounded-full object-cover"
-            src={currentUser?.photoUrl || "/assets/no-profile.jpeg"}
-            width={32}
-            height={32}
-            alt=""
-          />
+          <div className="relative h-8 w-8 overflow-hidden rounded-full">
+            <Image
+              className="object-cover"
+              src={currentUser?.photoUrl || "/assets/no-profile.jpeg"}
+              fill
+              alt=""
+            />
+          </div>
 
           <p className="text-sm font-medium capitalize sm:text-base">
             {currentUser?.displayName}
