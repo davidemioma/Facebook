@@ -17,6 +17,8 @@ const Feed = () => {
             {posts?.map((post) => (
               <Post key={post.id} post={post} />
             ))}
+
+            <div className="h-10 w-full md:hidden" />
           </div>
         ) : (
           <EmptyPosts />
