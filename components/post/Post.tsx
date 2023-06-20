@@ -53,7 +53,7 @@ const Post = ({ post }: Props) => {
         {post.caption}
       </p>
 
-      <Carousel files={files} />
+      {files.length > 0 && <Carousel files={files} />}
 
       <div className="flex items-center justify-between font-light">
         {likes.length > 0 && (

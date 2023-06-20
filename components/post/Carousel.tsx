@@ -21,10 +21,17 @@ const Carousel = ({ files }: Props) => {
 
   return (
     <div className="relative h-72 w-full bg-black">
-      {index !== 0 && (
-        <button className="controls left-3" onClick={() => handleArrow("l")}>
-          <ChevronLeftIcon className="h-6 text-blue-500" />
-        </button>
+      {files.length > 1 && (
+        <>
+          {index !== 0 && (
+            <button
+              className="controls left-3"
+              onClick={() => handleArrow("l")}
+            >
+              <ChevronLeftIcon className="h-6 text-blue-500" />
+            </button>
+          )}
+        </>
       )}
 
       <div className="h-full w-full overflow-hidden">
@@ -54,10 +61,17 @@ const Carousel = ({ files }: Props) => {
         </div>
       </div>
 
-      {index !== files?.length - 1 && (
-        <button className="controls right-3" onClick={() => handleArrow("r")}>
-          <ChevronRightIcon className="h-6 text-blue-500" />
-        </button>
+      {files.length > 1 && (
+        <>
+          {index !== files?.length - 1 && (
+            <button
+              className="controls right-3"
+              onClick={() => handleArrow("r")}
+            >
+              <ChevronRightIcon className="h-6 text-blue-500" />
+            </button>
+          )}
+        </>
       )}
     </div>
   );
